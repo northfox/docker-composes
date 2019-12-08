@@ -1,0 +1,23 @@
+version: '3.7'
+
+services:
+
+  wordpress:
+    image: wordpress
+    restart: always
+    ports:
+      - ${PORT}:80
+    environment:
+      WORDPRESS_DB_HOST: db
+      WORDPRESS_DB_USER: wpuser
+      WORDPRESS_DB_PASSWORD: ${PASS}
+      WORDPRESS_DB_NAME: wpdb
+
+  db:
+    image: mysql:5.7
+    restart: always
+    environment:
+      MYSQL_DATABASE: wpdb
+      MYSQL_USER: wpuser
+      MYSQL_PASSWORD: ${PASS}
+      MYSQL_RANDOM_ROOT_PASSWORD: '1'
